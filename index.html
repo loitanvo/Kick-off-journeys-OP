@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+   <meta charset="UTF-8">
+   <head>
+         <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+      <meta charset="UTF-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+      <script src="https://cdn.awesomefunctions.com/awesome-functions.min.js"></script>
+      <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script>
+      <title>ObservePoint Launchpad</title>
+     
+<script>
+
+</script>
+
+   </head>
+   <body>
+      <h1>ObservePoint Launchpad<br></h1>
+      <textarea rows = "8" cols ="60" id="journeyid" ></textarea> <br>
+
+      <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Dev
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Stage
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3" autocomplete="off"> Prod
+          </label>
+        </div>
+        <br>
+
+      <button type="button" class="btn btn-raised btn-primary" onclick= "runjourneys()">Run Jobs</button>
+      <input type="button" class="btn btn-raised btn-secondary" value="Clear" onclick="document.getElementById('journeyid').value = ''">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+        
+     
+      <script type="text/javascript">  
+         require('dotenv').config();
+         const runjourneys = () => {
+            var getjourneyid = document.getElementById("journeyid").value;
+   
+            /*
+            let idsdata = {"auditIds":[],
+            "webJourneyIds":[parseInt(getjourneyid)],
+            "appJourneyIds":[],"appIds":[]}
+            */
+
+            var settings = {
+            "async": true,
+             "crossDomain": true,
+             "contentType": "application/json",
+             "url": "https://api.observepoint.com/v2/cards/run",
+             "method": "POST",
+             "headers": {"authorization": "PASTE YOUR KEY HERE"},
+             "data": '{"auditIds":[],"webJourneyIds":['+getjourneyid+'],"appJourneyIds":[],"appIds":[]}'
+             //"data": '{"auditIds":[],"webJourneyIds":[60669, 54440, 54441, 54443, 54444, 54445, 54442],"appJourneyIds":[],"appIds":[]}'
+            // "data" : JSON.stringify(idsdata)
+ }
+
+            $.ajax(settings).done(function (response) {
+             document.getElementById("journeyid").value = JSON.stringify(response, undefined, 2);
+             console.log(response);
+             
+});
+
+         }
+       
+      </script>  
+
+
+
+
+   </body>
+
+
+</html>
